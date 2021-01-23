@@ -7,11 +7,12 @@ import sqlite3
 # import Os module to start the audio file
 import os 
 import sys
+#from pygame import mixer
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMessageBox
 from PyQt5.QtWidgets import QTableWidgetItem, QAbstractItemView, QVBoxLayout, QHBoxLayout, QHeaderView,QTableWidget
-
+from PyQt5.QtCore import QDate, QTime, QDateTime, Qt
 #conn = sqlite3.connect('tts.db')
 #cursor = conn.cursor()
 
@@ -47,7 +48,16 @@ class Ui_MainWindow(object):
         mess.setStandardButtons(QtWidgets.QMessageBox.Ok)
         mess.exec_()
 
-    
+    #def talk(self,audio):
+        #s=self.plainTextEdit.toPlainText() 
+                    #print(audio)
+                    #for line in audio.splitlines():
+        #date_string = datetime.now().strftime("%d%m%Y%H%M%S")
+        #text_to_speech = gTTS(text=s, lang='en-uk')
+        #text_to_speech.save('audio' +date_string+'.mp3')
+        #mixer.init()
+        #mixer.music.load("audio.mp3")#
+        #mixer.music.play()
     #def speak(text):
         #with open(text, 'r', encoding='utf-8') as filetospeak:
             #s = gTTS(filetospeak.read(), "it")
@@ -105,18 +115,247 @@ class Ui_MainWindow(object):
 
 
     
-    def listen(self):
-        s=self.plainTextEdit.toPlainText()   
+    def listen(self,datetime):
+        s=self.plainTextEdit.toPlainText()
 
-        #language = 'en'
-        tts = gTTS(text= s, lang='en') 
-        filename = 'voice.mp3'
+        langu=self.lang_combo.currentText()
+        
+        if langu == 'Albanian':
+            language = 'sq'
+        
+        elif langu == 'Arabic':
+            language = 'ar'
+
+        elif langu == 'Armenian':
+            language = 'hy'
+
+        elif langu == 'Bengali':
+            language = 'bn'
+
+        elif langu == 'Bosnian':
+            language = 'bs'
+
+        elif langu == 'Catalan':
+            language = 'ca'
+
+        elif langu == 'Croatian':
+            language = 'hr'
+
+        elif langu == 'Czech':
+            language = 'cs'
+
+        elif langu == 'Chinese':
+            language = 'zh-CN'
+
+        elif langu == 'Chinese (Mandarin/China)':
+            language = 'zh-cn'
+
+        elif langu == 'Chinese (Mandarin/Taiwan)':
+            language = 'zh-tw'
+
+        elif langu == 'Danish':
+            language = 'da'
+
+        elif langu == 'Dutch':
+            language = 'nl'
+        
+        elif langu == 'English':
+            language = 'en'
+
+        elif langu == 'English (Australia)':
+            language = 'en-au'
+
+        elif langu == 'English (Canada)':
+            language = 'en-ca'
+
+        elif langu == 'English (Ghana)':
+            language = 'en-gh'
+
+        elif langu == 'English (India)':
+            language = 'en-in'
+
+        elif langu == 'English (Ireland)':
+            language = 'en-ie'
+
+        elif langu == 'English (New Zealand)':
+            language = 'en-nz'
+
+        elif langu == 'English (Philippines)':
+            language = 'en-ph'
+
+        elif langu == 'English (South Africa)':
+            language = 'en-za'
+
+        elif langu == 'English (Tanzania)':
+            language = 'en-tz'
+
+        elif langu == 'English (UK)':
+            language = 'en-uk'
+
+        elif langu == 'English (US)':
+            language = 'en-us'
+
+        elif langu == 'Esperanto':
+            language = 'eo'
+
+        elif langu == 'Estonian':
+            language = 'et'
+
+        elif langu == 'Filipino':
+            language = 'tl'
+
+        elif langu == 'Finnish':
+            language = 'fi'
+
+        elif langu == 'French (Canada)':
+            language = 'fr-ca'
+
+        elif langu == 'French (France)':
+            language = 'fr-fr'
+
+        elif langu == 'German':
+            language = 'de'
+
+        elif langu == 'Greek':
+            language = 'el'
+
+        elif langu == 'Gujarati':
+            language = 'gu'
+
+        elif langu == 'Hungarian':
+            language = 'hu'
+
+        elif langu == 'Hindi':
+            language = 'hi'
+
+        elif langu == 'Indonesian':
+            language = 'id'
+
+        elif langu == 'Icelandic':
+            language = 'is'
+
+        elif langu == 'Italian':
+            language = 'it'
+
+        elif langu == 'Japanese':
+            language = 'ja'
+
+        elif langu == 'Javanese':
+            language = 'jw'
+
+        elif langu == 'Kannada':
+            language = 'kn'
+
+        elif langu == 'Khmer':
+            language = 'km'
+
+        elif langu == 'Korean':
+            language = 'ko'
+
+        elif langu == 'Latin':
+            language = 'la'
+
+        elif langu == 'Latvian':
+            language = 'lv'
+
+        elif langu == 'Macedonian':
+            language = 'mk'
+
+        elif langu == 'Malayalam':
+            language = 'ml'
+
+        elif langu == 'Marathi':
+            language = 'mr'
+
+        elif langu == 'Myanmar (Burmese)':
+            language = 'my'
+
+        elif langu == 'Nepali':
+            language = 'ne'
+
+        elif langu == 'Norwegian':
+            language = 'no'
+
+        elif langu == 'Polish':
+            language = 'pl'
+
+        elif langu == 'Portuguese':
+            language = 'pt'
+
+        elif langu == 'Portuguese (Brazil)':
+            language = 'pt-br'
+
+        elif langu == 'Portuguese (Portugal)':
+            language = 'pt-pt'
+
+        elif langu == 'Romanian':
+            language = 'ro'
+
+        elif langu == 'Russian':
+            language = 'ru'
+
+        elif langu == 'Serbian':
+            language = 'sr'
+
+        elif langu == 'Sinhala':
+            language = 'si'
+
+        elif langu == 'Slovak':
+            language = 'sk'
+
+        elif langu == 'Spanish':
+            language = 'es'
+
+        elif langu == 'Spanish (United States)':
+            language = 'es-us'
+
+        elif langu == 'Sundanese':
+            language = 'su'
+
+        elif langu == 'Swahili':
+            language = 'sw'
+
+        elif langu == 'Swedish':
+            language = 'sv'
+
+        elif langu == 'Tamil':
+            language = 'ta'
+
+        elif langu == 'Telugu':
+            language = 'te'
+
+        elif langu == 'Thai':
+            language = 'th'
+
+        elif langu == 'Turkish':
+            language = 'uk'
+
+        elif langu == 'Ukrainian':
+            language = 'tr'
+
+        elif langu == 'Urdu':
+            language = 'ur'
+
+        elif langu == 'Vietnamese':
+            language = 'vi'
+
+        elif langu == 'Welsh':
+            language = 'cy'
+        
+
+        
+
+        
+
+
+        #language = 'en-uk'
+        tts = gTTS(text= s, lang=language) 
+        filename = ('voice.mp3')#
         tts.save(filename) 
 
-        # Play the converted file 
-        #os.system("start voice.mp3") 
         playsound.playsound(filename)
-        self.loadData()
+        os.remove(filename)
+        #self.loadData()
 
 
     def loadData(self):
@@ -181,6 +420,29 @@ class Ui_MainWindow(object):
         self.plainTextEdit.setFrameShape(QtWidgets.QFrame.WinPanel)
         self.plainTextEdit.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.plainTextEdit.setObjectName("plainTextEdit")
+
+        #LANGUAGE COMBO BOX
+        self.lang_combo = QtWidgets.QComboBox(self.centralwidget)
+        self.lang_combo.setGeometry(QtCore.QRect(650, 430, 150, 41))
+        font = QtGui.QFont()
+        font.setBold(True)
+        font.setPointSize(12)
+        self.lang_combo.setFont(font)
+        self.lang_combo.setStyleSheet("background-color: qlineargradient(spread:pad,\
+             x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 255));color: black")
+        self.lang_combo.setObjectName("lang_combo")
+        
+        lang = ['Albanian',"Arabic",'Armenian','Bengali','Bosnian','Catalan','Croatian','Czech',"Chinese",'Chinese (Mandarin/China)',
+            'Chinese (Mandarin/Taiwan)','Croatian','Danish','Dutch','English','English (US)',"English (Australia)",
+            'English (Canada)',"English (Ghana)","English (India)",'English (Ireland)','English (New Zealand)',
+            'English (Philippines)',"English (UK)",'English (South Africa)','English (Tanzania)','Esperanto',
+            'Estonian','Filipino','Finnish','French (Canada)','French (France)','German','Greek','Gujarati','Hindi','Hungarian','Indonesian','Icelandic',
+            'Italian','Japanese','Javanese','Kannada','Khmer','Korean','Latin','Latvian','Macedonian','Malayalam','Marathi','Myanmar (Burmese)',
+            'Nepali','Norwegian','Polish','Portuguese','Portuguese (Brazil)','Portuguese (Portugal)','Romanian','Russian','Serbian',
+            'Sinhala','Slovak','Spanish','Spanish (United States)''Sundanese','Swahili','Swedish',
+            'Tamil','Telugu','Thai','Turkish','Ukrainian','Urdu','Vietnamese','Welsh']
+        self.lang_combo.addItems(lang)
+        #self.lang_combo.setEnabled(False)
 
 
         #TABLE
@@ -320,6 +582,10 @@ class Ui_MainWindow(object):
         self.id_edit.setGeometry(QtCore.QRect(430, 480, 100, 41))
         self.id_edit.setText("")
         self.id_edit.setObjectName("id_edit")
+
+
+       
+        
         
         #font = QtGui.QFont()
         #font.setPointSize(12)
@@ -337,6 +603,7 @@ class Ui_MainWindow(object):
         self.title_edit.raise_()
         self.id_edit.raise_()
         self.tableWidget.raise_()
+        self.lang_combo.raise_()
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
