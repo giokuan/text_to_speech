@@ -13,6 +13,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMessageBox
 from PyQt5.QtWidgets import QTableWidgetItem, QAbstractItemView, QVBoxLayout, QHBoxLayout, QHeaderView,QTableWidget
 from PyQt5.QtCore import QDate, QTime, QDateTime, Qt
+from PyQt5.QtGui import QIcon
+from PyQt5.QtCore import * 
+from PyQt5.QtGui import * 
+from PyQt5.QtWidgets import * 
 #conn = sqlite3.connect('tts.db')
 #cursor = conn.cursor()
 
@@ -111,7 +115,19 @@ class Ui_MainWindow(object):
 
         #print(s)
 
-        #self.plainTextEdit.appendPlainText(s)
+      #self.plainTextEdit.appendPlainText(s)
+    def languages(self):
+        langu=self.lang_combo.currentText()
+
+        if langu == 'Arabic':
+            self.hear_label.setText("القارئ الكسول")
+            self.enter_text_label.setText(" أدخل النص أدناه")
+            self.save_btn.setText(" حفظ")
+            
+
+        elif langu == 'Albanian':
+            self.hear_label.setText("lexuesi dembel")
+            
 
 
     
@@ -122,9 +138,11 @@ class Ui_MainWindow(object):
         
         if langu == 'Albanian':
             language = 'sq'
+
         
         elif langu == 'Arabic':
             language = 'ar'
+            
 
         elif langu == 'Armenian':
             language = 'hy'
@@ -144,9 +162,6 @@ class Ui_MainWindow(object):
         elif langu == 'Czech':
             language = 'cs'
 
-        elif langu == 'Chinese':
-            language = 'zh-CN'
-
         elif langu == 'Chinese (Mandarin/China)':
             language = 'zh-cn'
 
@@ -158,9 +173,6 @@ class Ui_MainWindow(object):
 
         elif langu == 'Dutch':
             language = 'nl'
-        
-        elif langu == 'English':
-            language = 'en'
 
         elif langu == 'English (Australia)':
             language = 'en-au'
@@ -279,9 +291,6 @@ class Ui_MainWindow(object):
         elif langu == 'Polish':
             language = 'pl'
 
-        elif langu == 'Portuguese':
-            language = 'pt'
-
         elif langu == 'Portuguese (Brazil)':
             language = 'pt-br'
 
@@ -343,10 +352,6 @@ class Ui_MainWindow(object):
             language = 'cy'
         
 
-        
-
-        
-
 
         #language = 'en-uk'
         tts = gTTS(text= s, lang=language) 
@@ -354,8 +359,15 @@ class Ui_MainWindow(object):
         tts.save(filename) 
 
         playsound.playsound(filename)
+        
+     
         os.remove(filename)
         #self.loadData()
+
+    def pause(self):
+        pass
+
+      
 
 
     def loadData(self):
@@ -432,17 +444,92 @@ class Ui_MainWindow(object):
              x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 255));color: black")
         self.lang_combo.setObjectName("lang_combo")
         
-        lang = ['Albanian',"Arabic",'Armenian','Bengali','Bosnian','Catalan','Croatian','Czech',"Chinese",'Chinese (Mandarin/China)',
-            'Chinese (Mandarin/Taiwan)','Croatian','Danish','Dutch','English','English (US)',"English (Australia)",
+        lang = ['Albanian',"Arabic",'Armenian','Bengali','Bosnian','Catalan','Croatian','Czech','Chinese (Mandarin/China)',
+            'Chinese (Mandarin/Taiwan)','Danish','Dutch','English (US)',"English (Australia)",
             'English (Canada)',"English (Ghana)","English (India)",'English (Ireland)','English (New Zealand)',
             'English (Philippines)',"English (UK)",'English (South Africa)','English (Tanzania)','Esperanto',
             'Estonian','Filipino','Finnish','French (Canada)','French (France)','German','Greek','Gujarati','Hindi','Hungarian','Indonesian','Icelandic',
             'Italian','Japanese','Javanese','Kannada','Khmer','Korean','Latin','Latvian','Macedonian','Malayalam','Marathi','Myanmar (Burmese)',
-            'Nepali','Norwegian','Polish','Portuguese','Portuguese (Brazil)','Portuguese (Portugal)','Romanian','Russian','Serbian',
-            'Sinhala','Slovak','Spanish','Spanish (United States)''Sundanese','Swahili','Swedish',
+            'Nepali','Norwegian','Polish','Portuguese (Brazil)','Portuguese (Portugal)','Romanian','Russian','Serbian',
+            'Sinhala','Slovak','Spanish','Spanish (United States)','Sundanese','Swahili','Swedish',
             'Tamil','Telugu','Thai','Turkish','Ukrainian','Urdu','Vietnamese','Welsh']
         self.lang_combo.addItems(lang)
-        #self.lang_combo.setEnabled(False)
+        size = QSize(35, 35) 
+        self.lang_combo.setIconSize(size)
+        self.lang_combo.activated[str].connect(self.languages)
+        self.lang_combo.setItemIcon(0, QIcon('flags/albania.png'))
+        self.lang_combo.setItemIcon(1, QIcon('flags/ksa.jpg'))
+        self.lang_combo.setItemIcon(2, QIcon('flags/armenia.jpg'))
+        self.lang_combo.setItemIcon(3, QIcon('flags/bengali.jpg'))
+        self.lang_combo.setItemIcon(4, QIcon('flags/bosnian.png'))
+        self.lang_combo.setItemIcon(5, QIcon('flags/catalan.png'))
+        self.lang_combo.setItemIcon(6, QIcon('flags/croatian.png'))
+        self.lang_combo.setItemIcon(7, QIcon('flags/czech.jpg'))
+        self.lang_combo.setItemIcon(8, QIcon('flags/china.jpg'))
+        self.lang_combo.setItemIcon(9, QIcon('flags/taiwan.png'))
+        self.lang_combo.setItemIcon(10, QIcon('flags/danish.jpg'))
+        self.lang_combo.setItemIcon(11, QIcon('flags/dutch.png'))
+        self.lang_combo.setItemIcon(12, QIcon('flags/usa.jpg'))
+        self.lang_combo.setItemIcon(13, QIcon('flags/aus.jpg'))
+        self.lang_combo.setItemIcon(14, QIcon('flags/canada.jpg'))
+        self.lang_combo.setItemIcon(15, QIcon('flags/ghana.jpg'))
+        self.lang_combo.setItemIcon(16, QIcon('flags/india.png'))
+        self.lang_combo.setItemIcon(17, QIcon('flags/ireland.png'))
+        self.lang_combo.setItemIcon(18, QIcon('flags/newZealand.png'))
+        self.lang_combo.setItemIcon(19, QIcon('flags/philippines.jpg'))
+        self.lang_combo.setItemIcon(20, QIcon('flags/uk.png'))
+        self.lang_combo.setItemIcon(21, QIcon('flags/southAfrica.jpg'))
+        self.lang_combo.setItemIcon(22, QIcon('flags/tanzania.jpg'))
+        self.lang_combo.setItemIcon(23, QIcon('flags/esperanto.png'))
+        self.lang_combo.setItemIcon(24, QIcon('flags/estonian.png'))
+        self.lang_combo.setItemIcon(25, QIcon('flags/philippines.jpg'))
+        self.lang_combo.setItemIcon(26, QIcon('flags/finnish.png'))
+        self.lang_combo.setItemIcon(27, QIcon('flags/canada.jpg'))
+        self.lang_combo.setItemIcon(28, QIcon('flags/france.jpg'))
+        self.lang_combo.setItemIcon(29, QIcon('flags/german.jpg'))
+        self.lang_combo.setItemIcon(30, QIcon('flags/greek.png'))
+        self.lang_combo.setItemIcon(31, QIcon('flags/gujarat.png'))
+        self.lang_combo.setItemIcon(32, QIcon('flags/india.png'))
+        self.lang_combo.setItemIcon(33, QIcon('flags/hungarian.png'))
+        self.lang_combo.setItemIcon(34, QIcon('flags/indonesian.jpg'))
+        self.lang_combo.setItemIcon(35, QIcon('flags/icelandic.png'))
+        self.lang_combo.setItemIcon(36, QIcon('flags/italian.jpg'))
+        self.lang_combo.setItemIcon(37, QIcon('flags/japanese.jpg'))
+        self.lang_combo.setItemIcon(38, QIcon('flags/indonesian.jpg'))
+        self.lang_combo.setItemIcon(39, QIcon('flags/Kannada.png'))
+        self.lang_combo.setItemIcon(40, QIcon('flags/khemer.png'))
+        self.lang_combo.setItemIcon(41, QIcon('flags/korean.jpg'))
+        #self.lang_combo.setItemIcon(42, QIcon('flags/latin.jpg'))
+        self.lang_combo.setItemIcon(43, QIcon('flags/latvian.jpg'))
+        self.lang_combo.setItemIcon(44, QIcon('flags/macedonian.jpg'))
+        self.lang_combo.setItemIcon(45, QIcon('flags/india.png'))
+        self.lang_combo.setItemIcon(46, QIcon('flags/marathi.png'))
+        self.lang_combo.setItemIcon(47, QIcon('flags/myanmar.jpg'))
+        self.lang_combo.setItemIcon(48, QIcon('flags/nepali.png'))
+        self.lang_combo.setItemIcon(49, QIcon('flags/norwegian.png'))
+        self.lang_combo.setItemIcon(50, QIcon('flags/polish.png'))
+        self.lang_combo.setItemIcon(52, QIcon('flags/portuguese.jpg'))
+        self.lang_combo.setItemIcon(51, QIcon('flags/brazil.jpg'))
+        self.lang_combo.setItemIcon(53, QIcon('flags/romanian.jpg'))
+        self.lang_combo.setItemIcon(54, QIcon('flags/russian.jpg'))
+        self.lang_combo.setItemIcon(55, QIcon('flags/serbian.jpg'))
+        self.lang_combo.setItemIcon(56, QIcon('flags/sinhala.jpg'))
+        self.lang_combo.setItemIcon(57, QIcon('flags/slovak.png'))
+        self.lang_combo.setItemIcon(58, QIcon('flags/spanish.png'))
+        self.lang_combo.setItemIcon(59, QIcon('flags/usa.jpg'))
+        self.lang_combo.setItemIcon(60, QIcon('flags/sundanese.png'))
+        self.lang_combo.setItemIcon(61, QIcon('flags/swahili.jpg'))
+        self.lang_combo.setItemIcon(62, QIcon('flags/swedish.png'))
+        self.lang_combo.setItemIcon(63, QIcon('flags/tamil.png'))
+        self.lang_combo.setItemIcon(64, QIcon('flags/india.png'))
+        self.lang_combo.setItemIcon(65, QIcon('flags/thai.png'))
+        self.lang_combo.setItemIcon(66, QIcon('flags/turkish.jpg'))
+        self.lang_combo.setItemIcon(67, QIcon('flags/ukrainian.jpg'))
+        self.lang_combo.setItemIcon(68, QIcon('flags/urdu.png'))
+        self.lang_combo.setItemIcon(69, QIcon('flags/vietnamese.png'))
+        self.lang_combo.setItemIcon(70, QIcon('flags/welsh.png'))
+        #self.lang_combo.setCurrentIndex(intLastSavedState1)
+       
 
 
         #TABLE
@@ -558,6 +645,23 @@ class Ui_MainWindow(object):
         #self.load_btn.clicked.connect(self.loadtext)
         self.load_btn.clicked.connect(self.search)
 
+        #STOP BUTTON
+        self.stop_btn = QtWidgets.QPushButton(self.centralwidget)
+        self.stop_btn.setGeometry(QtCore.QRect(240, 480, 171, 41))
+        font = QtGui.QFont()
+        font.setFamily("Gunship Expanded")
+        font.setPointSize(15)
+        font.setBold(False)
+        font.setWeight(50)
+        self.stop_btn.setFont(font)
+        self.stop_btn.setStyleSheet("background-color: qlineargradient(spread:pad,\
+            x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 255));")
+        self.stop_btn.setObjectName("stop_btn")
+        #self.load_btn.clicked.connect(self.loadtext)
+        #self.stop_btn.clicked.connect(lambda:self.hear_label.setText("lexuesi dembel"))
+        
+        
+
         #EXIT BUTTON
         self.exit_btn = QtWidgets.QPushButton(self.centralwidget)
         self.exit_btn.setGeometry(QtCore.QRect(430, 380, 171, 41))
@@ -600,6 +704,7 @@ class Ui_MainWindow(object):
         self.load_btn.raise_()
         self.exit_btn.raise_()
         self.save_btn.raise_()
+        self.stop_btn.raise_()
         self.title_edit.raise_()
         self.id_edit.raise_()
         self.tableWidget.raise_()
@@ -614,14 +719,15 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "HEAR YOUR TEXT APP"))
-        self.hear_label.setText(_translate("MainWindow", "HEAR YOUR TEXT"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "The Lazy Reader"))
+        self.hear_label.setText(_translate("MainWindow", "The Lazy Reader"))
         self.listen_btn.setText(_translate("MainWindow", "Listen"))
         self.enter_text_label.setText(_translate("MainWindow", "Enter Text Below:"))
         self.clear_btn.setText(_translate("MainWindow", "CLEAR"))
         self.load_btn.setText(_translate("MainWindow", "LOAD"))
         self.exit_btn.setText(_translate("MainWindow", "EXIT"))
         self.save_btn.setText(_translate("MainWindow", "SAVE"))
+        self.stop_btn.setText(_translate("MainWindow", "STOP"))
 
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Title"))
